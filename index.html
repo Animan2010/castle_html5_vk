@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+<head>
+       <title>Secrets of the Castle - Match 3</title>
+       <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+       <meta id="gameViewport" name="viewport" content="width=device-width initial-scale=1 shrink-to-fit=no user-scalable=no viewport-fit=cover">
+       <link href="styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<!--
+<a class="superdev" href="javascript:%7B%20window.__gwt_bookmarklet_params%20%3D%20%7B'server_url'%3A'http%3A%2F%2Flocalhost%3A9876%2F'%7D%3B%20var%20s%20%3D%20document.createElement('script')%3B%20s.src%20%3D%20'http%3A%2F%2Flocalhost%3A9876%2Fdev_mode_on.js'%3B%20void(document.getElementsByTagName('head')%5B0%5D.appendChild(s))%3B%7D">&#8635;</a>
+-->
+<div align="center" id="embed-html"></div>
+<script type="text/javascript" src="html/html.nocache.js"></script>
+<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+
+<script type="module">
+
+         // Import the functions you need from the SDKs you need
+         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+         import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-analytics.js";
+         // TODO: Add SDKs for Firebase products that you want to use
+         // https://firebase.google.com/docs/web/setup#available-libraries
+
+         // Your web app's Firebase configuration
+         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+         const firebaseConfig = {
+           apiKey: "AIzaSyAdqBatKCvvNmJ7Xn7LcC06AG3RkNawYjY",
+           authDomain: "secrets-of-the-castle.firebaseapp.com",
+           databaseURL: "https://secrets-of-the-castle.firebaseio.com",
+           projectId: "secrets-of-the-castle",
+           storageBucket: "secrets-of-the-castle.appspot.com",
+           messagingSenderId: "287719247031",
+           appId: "1:287719247031:web:a822320c04c687fb57d132",
+           measurementId: "G-ZRT7QJZXER"
+         };
+
+         // Initialize Firebase
+         const app = initializeApp(firebaseConfig);
+         const analytics = getAnalytics(app);
+
+              const urlParams = new URLSearchParams(window.location.search);
+              const player_id = urlParams.get('viewer_id');
+
+              window.InitVkWebApp = function initVkWebApp() {
+                     vkBridge.send("VKWebAppInit", {});
+                     logEvent(analytics, 'launch_game');
+              }
+
+              window.InitVkWebApp();
+
+              window.ShowInterstitial = function showInterstitial() {
+                     vkBridge.send("VKWebAppShowNativeAds", {"ad_format": "interstitial"});
+                     logEvent(analytics, 'show_interstitial');
+              }
+
+              window.ShowRewarded = function showRewarded() {
+                     vkBridge.send("VKWebAppShowNativeAds", {ad_format:"reward"})
+                            .then(data => window.OnRewardedVideoShown(data.result))
+                            .catch(error => console.log(error));
+                     logEvent(analytics, 'show_rewarded');
+              }
+
+              window.BuyInApp = function buyInApp(inapp_id) {
+                     vkBridge.send("VKWebAppShowOrderBox", {type:"item",item:inapp_id})
+                       .then(data => window.OnInAppBought(data.success, inapp_id))
+                       .catch(error => console.log(error));
+              }
+
+              window.GetKey = function getKey(key) {
+                     vkBridge.send("VKWebAppStorageGet", {"keys": [key]})
+                            .then(data => window.OnGetKey(key, data.keys[0].value))
+                            .catch(error => console.log(error));
+              }
+
+              window.SetKey = function setKey(k, v) {
+                     vkBridge.send("VKWebAppStorageSet", {
+                        key: k,
+                        value: v
+                     });
+              }
+
+              window.CheckRewarded = function checkRewarded() {
+                     vkBridge.send("VKWebAppCheckNativeAds", {ad_format:"reward"})
+                            .then(data => window.OnRewardedVideoCheck(data.result))
+                            .catch(error => console.log(error));
+              }
+
+              window.CheckInterstitial = function checkInterstitial() {
+                     vkBridge.send("VKWebAppCheckNativeAds", {"ad_format": "interstitial"})
+                            .then(data => console.log(data.result))
+                            .catch(error => console.log(error));
+              }
+
+              window.ShareLevel = function shareLevel(lvl) {
+              }
+
+              window.SetRecord = function setRecord(lvl) {
+                     vkBridge.send("VKWebAppCallAPIMethod",
+                     {"method": "secure.addAppEvent", "request_id": "set_record",
+                     "params": {
+                            "user_id": player_id,
+                            "activity_id":"1",
+                            "value":lvl
+                            }});
+              }
+
+              window.InviteFriends = function inviteFriends() {
+                     vkBridge.send("VKWebAppShowInviteBox", {})
+                             .then(data => console.log(data.success))
+                             .catch(error => console.log(error));
+                     logEvent(analytics, 'invite_friends');
+              }
+
+              window.LogLevelFailed = function logLevelFailed(lvl) {
+                     logEvent(analytics, 'level_failed_web', {level: lvl});
+              }
+
+              window.LogLevelCompleted = function logLevelCompleted(lvl) {
+                     logEvent(analytics, 'level_completed_web', {level: lvl});
+              }
+
+              window.ShowRecords = function showRecords(lvl) {
+                     vkBridge.send("VKWebAppShowLeaderBoardBox", {user_result:lvl})
+                            .then(data => console.log(data.success))
+                            .catch(error => console.log(error));
+              }
+
+              function handleMouseDown(evt) {
+                evt.preventDefault();
+                evt.stopPropagation();
+                window.focus();
+              }
+
+              function handleMouseUp(evt) {
+                evt.preventDefault();
+                evt.stopPropagation();
+              }
+              document.addEventListener('contextmenu', event => event.preventDefault());
+              document.getElementById('embed-html').addEventListener('mousedown', handleMouseDown, false);
+              document.getElementById('embed-html').addEventListener('mouseup', handleMouseUp, false);
+       </script>
+
+</body>
+
+</html>
