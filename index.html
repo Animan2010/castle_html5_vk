@@ -44,7 +44,30 @@
               const player_id = urlParams.get('viewer_id');
 
               window.InitVkWebApp = function initVkWebApp() {
-                     vkBridge.send("VKWebAppInit", {});
+                     vkBridge.send('VKWebAppInit')
+                              .then((data) => {
+                                if (data.result) {
+                                  // Приложение инициализировано
+                                  vkBridge.send('VKWebAppShowBannerAd', {
+                                     banner_location: 'bottom'
+                                     })
+                                    .then((data) => {
+                                       if (data.result) {
+                                         // Баннерная реклама отобразилась
+                                       }
+                                     })
+                                     .catch((error) => {
+                                       // Ошибка
+                                       console.log(error);
+                                     });
+                                } else {
+                                  // Ошибка
+                                }
+                              })
+                              .catch((error) => {
+                                // Ошибка
+                                console.log(error);
+                              });
                      logEvent(analytics, 'launch_game');
               }
 
