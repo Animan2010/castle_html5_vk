@@ -1,6 +1,12 @@
 d:assets:assets:0:application/unknown:1
 d:fonts:fonts:0:application/unknown:1
 b:fonts/Font.otf:fonts/Font-19132a90b1ac780ee78fd2095bae22ca.otf:100780:application/unknown:1
+t:fonts/FontMainL.fnt:fonts/FontMainL-e5aebac8f75b1e8820f0bc24db33f10a.fnt:20934:application/unknown:1
+i:fonts/FontMainL.png:fonts/FontMainL-15ef2f14893b32ebb788a5fde79fdbcc.png:25921:image/png:1
+t:fonts/FontMainM.fnt:fonts/FontMainM-eaec12f3607bfd88f249570031e120e8.fnt:20781:application/unknown:1
+i:fonts/FontMainM.png:fonts/FontMainM-c0d6cbf86cedf2b92b6c5506a41730d5.png:21144:image/png:1
+t:fonts/FontMainS.fnt:fonts/FontMainS-047008e98e4d85ae703047c616e90ccf.fnt:19597:application/unknown:1
+i:fonts/FontMainS.png:fonts/FontMainS-2035ca23750b3b8953a6d7f914136047.png:15564:image/png:1
 d:graphics:graphics:0:application/unknown:1
 i:graphics/Background.jpg:graphics/Background-a4edac2bcce4198dea4794b244cbec6d.jpg:48313:image/jpeg:1
 i:graphics/Displacement.jpg:graphics/Displacement-06f8e2129955cfe9fa1037faf1535da3.jpg:60974:image/jpeg:1
