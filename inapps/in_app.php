@@ -30,77 +30,77 @@ if ($sig != md5($str.$secret_key)) {
             $response['response'] = array(
               'item_id' => 100,
               'title' => '500 золотых монет',
-              'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/gold_a.png',
+              'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/gold_a.png',
               'price' => 3
             );
           } elseif ($item == 'gold_3_dollars') {
             $response['response'] = array(
                 'item_id' => 101,
                 'title' => '1650 золотых монет',
-                'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/gold_b.png',
+                'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/gold_b.png',
                 'price' => 9
             );
           } elseif ($item == 'gold_5_dollars') {
             $response['response'] = array(
                 'item_id' => 102,
                 'title' => '3000 золотых монет',
-                'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/gold_c.png',
+                'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/gold_c.png',
                 'price' => 15
             );
           } elseif ($item == 'gold_10_dollars') {
             $response['response'] = array(
                 'item_id' => 103,
                 'title' => '6500 золотых монет',
-                'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/gold_d.png',
+                'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/gold_d.png',
                 'price' => 30
             );
           } elseif ($item == 'gold_40_dollars') {
             $response['response'] = array(
                 'item_id' => 104,
                 'title' => '30000 золотых монет',
-                'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/gold_e.png',
+                'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/gold_e.png',
                 'price' => 120
             );
           } elseif ($item == 'disable_ads') {
             $response['response'] = array(
                 'item_id' => 110,
                 'title' => 'Отключить рекламу',
-                'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/logo.png',
+                'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/logo.png',
                 'price' => 5
             );
           } elseif ($item == 'starter_bundle') {
             $response['response'] = array(
                 'item_id' => 111,
                 'title' => 'Набор новичка',
-                'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/bonus_pack.png',
+                'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/bonus_pack.png',
                 'price' => 2
             );
           } elseif ($item == 'energy_boost') {
             $response['response'] = array(
                 'item_id' => 112,
                 'title' => 'Бустер ходов',
-                'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/energy.png',
+                'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/energy.png',
                 'price' => 3
             );
           } elseif ($item == 'bonus_chest') {
             $response['response'] = array(
                 'item_id' => 113,
                 'title' => 'Сундук с бонусами',
-                'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/bonus_pack.png',
+                'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/bonus_pack.png',
                 'price' => 20
             );
           } elseif ($item == 'daily_coins') {
             $response['response'] = array(
                 'item_id' => 114,
                 'title' => 'Мешочек золота',
-                'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/gold_b.png',
+                'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/gold_b.png',
                 'price' => 6
             );
           } elseif ($item == 'explosive_sale') {
             $response['response'] = array(
                 'item_id' => 115,
                 'title' => 'Взрывное предложение',
-                'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/logo.png',
+                'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/logo.png',
                 'price' => 6
             );
           } else {
@@ -119,77 +119,77 @@ if ($sig != md5($str.$secret_key)) {
                 $response['response'] = array(
                   'item_id' => 100,
                   'title' => '500 золотых монет',
-                  'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/gold_a.png',
+                  'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/gold_a.png',
                   'price' => 3
                 );
               } elseif ($item == 'gold_3_dollars') {
                 $response['response'] = array(
                     'item_id' => 101,
                     'title' => '1650 золотых монет',
-                    'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/gold_b.png',
+                    'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/gold_b.png',
                     'price' => 9
                 );
               } elseif ($item == 'gold_5_dollars') {
                 $response['response'] = array(
                     'item_id' => 102,
                     'title' => '3000 золотых монет',
-                    'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/gold_c.png',
+                    'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/gold_c.png',
                     'price' => 15
                 );
               } elseif ($item == 'gold_10_dollars') {
                 $response['response'] = array(
                     'item_id' => 103,
                     'title' => '6500 золотых монет',
-                    'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/gold_d.png',
+                    'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/gold_d.png',
                     'price' => 30
                 );
               } elseif ($item == 'gold_40_dollars') {
                 $response['response'] = array(
                     'item_id' => 104,
                     'title' => '30000 золотых монет',
-                    'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/gold_e.png',
+                    'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/gold_e.png',
                     'price' => 120
                 );
               } elseif ($item == 'disable_ads') {
                 $response['response'] = array(
                     'item_id' => 110,
                     'title' => 'Отключить рекламу',
-                    'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/logo.png',
+                    'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/logo.png',
                     'price' => 5
                 );
               } elseif ($item == 'starter_bundle') {
                 $response['response'] = array(
                     'item_id' => 111,
                     'title' => 'Набор новичка',
-                    'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/bonus_pack.png',
+                    'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/bonus_pack.png',
                     'price' => 2
                 );
               } elseif ($item == 'energy_boost') {
                 $response['response'] = array(
                     'item_id' => 112,
                     'title' => 'Бустер ходов',
-                    'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/energy.png',
+                    'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/energy.png',
                     'price' => 3
                 );
               } elseif ($item == 'bonus_chest') {
                 $response['response'] = array(
                     'item_id' => 113,
                     'title' => 'Сундук с бонусами',
-                    'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/bonus_pack.png',
+                    'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/bonus_pack.png',
                     'price' => 20
                 );
               } elseif ($item == 'daily_coins') {
                 $response['response'] = array(
                     'item_id' => 114,
                     'title' => 'Мешочек золота',
-                    'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/gold_b.png',
+                    'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/gold_b.png',
                     'price' => 6
                 );
               } elseif ($item == 'explosive_sale') {
                 $response['response'] = array(
                     'item_id' => 115,
                     'title' => 'Взрывное предложение',
-                    'photo_url' => 'https://animan2010.github.io/castle_html5_vk/inapps/logo.png',
+                    'photo_url' => 'https://www.exclusive-art.ru/vk_scripts/castle/logo.png',
                     'price' => 6
                 );
               } else {
