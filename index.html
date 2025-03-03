@@ -44,34 +44,9 @@
               const player_id = urlParams.get('viewer_id');
 
               window.InitVkWebApp = function initVkWebApp() {
-                     vkBridge.send('VKWebAppInit')
-                              .then((data) => {
-                                if (data.result) {
-                                  // Приложение инициализировано
-                                  vkBridge.send('VKWebAppShowBannerAd', {
-                                     banner_location: 'bottom'
-                                     })
-                                    .then((data) => {
-                                       if (data.result) {
-                                         // Баннерная реклама отобразилась
-                                       }
-                                     })
-                                     .catch((error) => {
-                                       // Ошибка
-                                       console.log(error);
-                                     });
-                                } else {
-                                  // Ошибка
-                                }
-                              })
-                              .catch((error) => {
-                                // Ошибка
-                                console.log(error);
-                              });
+                     vkBridge.send("VKWebAppInit", {});
                      logEvent(analytics, 'launch_game');
               }
-
-              window.InitVkWebApp();
 
               window.ShowInterstitial = function showInterstitial() {
                      vkBridge.send("VKWebAppShowNativeAds", {"ad_format": "interstitial"});
@@ -134,14 +109,6 @@
                              .then(data => console.log(data.success))
                              .catch(error => console.log(error));
                      logEvent(analytics, 'invite_friends');
-              }
-
-              window.LogLevelFailed = function logLevelFailed(lvl) {
-                     logEvent(analytics, 'level_failed_web', {level: lvl});
-              }
-
-              window.LogLevelCompleted = function logLevelCompleted(lvl) {
-                     logEvent(analytics, 'level_completed_web', {level: lvl});
               }
 
               window.ShowRecords = function showRecords(lvl) {
