@@ -44,19 +44,59 @@
               const player_id = urlParams.get('viewer_id');
 
               window.InitVkWebApp = function initVkWebApp() {
-                     vkBridge.send("VKWebAppInit", {});
+                     vkBridge.send('VKWebAppInit').then((data) => {
+                                if (data.result) {
+                                   try {
+                                                 logEvent(analytics, 'progression', {progression_type: "init_vk_web_app"});
+                                                // Приложение инициализировано
+                                                vkBridge.send('VKWebAppShowBannerAd', {
+                                                   banner_location: 'bottom'
+                                                   })
+                                                  .then((data) => {
+                                                     if (data.result) {
+                                                       // Баннерная реклама отобразилась
+                                                        logEvent(analytics, 'progression', {progression_type: "showed_banner"});
+                                                     }
+                                                   })
+                                                   .catch((error) => {
+                                                     // Ошибка
+                                                        logEvent(analytics, 'error', {error_description: "error_show_banner_ad"});
+                                                   });
+                                     } catch (error) {
+                                          logEvent(analytics, 'error', {error_description: "error_send_banner_request"});
+                                     }
+                                } else {
+                                  // Ошибка
+                                  logEvent(analytics, 'error', {error_description: "error_init_vk_web_app"});
+                                }
+                              })
+                              .catch((error) => {
+                                // Ошибка
+                                logEvent(analytics, 'error', {error_description: "error_send_vk_init_request"});
+                                console.log(error);
+                              });
                      logEvent(analytics, 'launch_game');
               }
 
+              //window.InitVkWebApp();
+
               window.ShowInterstitial = function showInterstitial() {
-                     vkBridge.send("VKWebAppShowNativeAds", {"ad_format": "interstitial"});
+                     try {
+                            vkBridge.send("VKWebAppShowNativeAds", {"ad_format": "interstitial"});
+                     } catch (error) {
+                             logEvent(analytics, 'error', {error_description: "error_show_interstitial"});
+                     }
                      logEvent(analytics, 'show_interstitial');
               }
 
               window.ShowRewarded = function showRewarded() {
+                     try {
                      vkBridge.send("VKWebAppShowNativeAds", {ad_format:"reward"})
                             .then(data => window.OnRewardedVideoShown(data.result))
                             .catch(error => console.log(error));
+                     } catch (error) {
+                             logEvent(analytics, 'error', {error_description: "error_show_rewarded"});
+                     }
                      logEvent(analytics, 'show_rewarded');
               }
 
@@ -67,41 +107,57 @@
               }
 
               window.GetKey = function getKey(key) {
-                     vkBridge.send("VKWebAppStorageGet", {"keys": [key]})
-                            .then(data => window.OnGetKey(key, data.keys[0].value))
-                            .catch(error => console.log(error));
+                     try {
+                            vkBridge.send("VKWebAppStorageGet", {"keys": [key]})
+                                   .then(data => window.OnGetKey(key, data.keys[0].value))
+                                   .catch(error => console.log(error));
+                     } catch (error) {
+                             logEvent(analytics, 'error', {error_description: "error_get_key"});
+                     }
               }
 
               window.SetKey = function setKey(k, v) {
-                     vkBridge.send("VKWebAppStorageSet", {
-                        key: k,
-                        value: v
-                     });
+                     try {
+                            vkBridge.send("VKWebAppStorageSet", {
+                               key: k,
+                               value: v
+                            });
+                     } catch (error) {
+                             logEvent(analytics, 'error', {error_description: "error_set_key"});
+                             }
               }
 
               window.CheckRewarded = function checkRewarded() {
+                     try {
                      vkBridge.send("VKWebAppCheckNativeAds", {ad_format:"reward"})
                             .then(data => window.OnRewardedVideoCheck(data.result))
                             .catch(error => console.log(error));
+                     } catch (error) {}
               }
 
               window.CheckInterstitial = function checkInterstitial() {
+                     try {
                      vkBridge.send("VKWebAppCheckNativeAds", {"ad_format": "interstitial"})
                             .then(data => console.log(data.result))
                             .catch(error => console.log(error));
+                    } catch (error) {}
               }
 
               window.ShareLevel = function shareLevel(lvl) {
               }
 
               window.SetRecord = function setRecord(lvl) {
-                     vkBridge.send("VKWebAppCallAPIMethod",
-                     {"method": "secure.addAppEvent", "request_id": "set_record",
-                     "params": {
-                            "user_id": player_id,
-                            "activity_id":"1",
-                            "value":lvl
-                            }});
+                     try {
+                            vkBridge.send("VKWebAppCallAPIMethod",
+                                   {"method": "secure.addAppEvent", "request_id": "set_record",
+                                   "params": {
+                                          "user_id": player_id,
+                                          "activity_id":"1",
+                                          "value":lvl
+                                          }});
+                     } catch (error) {
+                            logEvent(analytics, 'error', {error_description: "error_set_record"});
+                      }
               }
 
               window.InviteFriends = function inviteFriends() {
@@ -109,6 +165,20 @@
                              .then(data => console.log(data.success))
                              .catch(error => console.log(error));
                      logEvent(analytics, 'invite_friends');
+              }
+
+              window.LogLevelFailed = function logLevelFailed(lvl) {
+                     logEvent(analytics, 'level_failed_web', {level: lvl});
+              }
+
+              window.LogLevelCompleted = function logLevelCompleted(lvl) {
+                     logEvent(analytics, 'level_completed_web', {level: lvl});
+              }
+
+              window.LogEvent = function logCustomEvent(event_name, event_param, event_param_value) {
+                     var p = {};
+                     p[event_param] = event_param_value;
+                     logEvent(analytics, event_name, p);
               }
 
               window.ShowRecords = function showRecords(lvl) {
