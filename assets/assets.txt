@@ -10,7 +10,7 @@ i:fonts/FontMainS.png:fonts/FontMainS-2035ca23750b3b8953a6d7f914136047.png:15564
 d:graphics:graphics:0:application/unknown:1
 i:graphics/Background.jpg:graphics/Background-a4edac2bcce4198dea4794b244cbec6d.jpg:48313:image/jpeg:1
 i:graphics/Displacement.jpg:graphics/Displacement-06f8e2129955cfe9fa1037faf1535da3.jpg:60974:image/jpeg:1
-i:graphics/Gems.png:graphics/Gems-28e8c9e04546f3829b42a36e1fbaebed.png:149382:image/png:1
+i:graphics/Gems.png:graphics/Gems-18437d6bc19a3bdf0c5b1c5cb5c1a070.png:489416:image/png:1
 i:graphics/InterfaceA.png:graphics/InterfaceA-9b949b6ff4cbe2327d30796a1995035d.png:110033:image/png:1
 i:graphics/InterfaceB.png:graphics/InterfaceB-ca27d05be8fc7909a13c13844295f0e1.png:93092:image/png:1
 i:graphics/InterfaceC.png:graphics/InterfaceC-da34ac7ef7f3152a890f93c5737329c6.png:158030:image/png:1
