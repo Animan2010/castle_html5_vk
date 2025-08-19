@@ -89,6 +89,10 @@
                      logEvent(analytics, 'show_interstitial');
               }
 
+              window.LogEventWeb = function logEventWeb(message) {
+                     console.log(message);
+              }
+
               window.ShowRewarded = function showRewarded() {
                      try {
                      vkBridge.send("VKWebAppShowNativeAds", {ad_format:"reward"})
