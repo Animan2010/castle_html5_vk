@@ -5,6 +5,19 @@
        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
        <meta id="gameViewport" name="viewport" content="width=device-width initial-scale=1 shrink-to-fit=no user-scalable=no viewport-fit=cover">
        <link href="styles.css" rel="stylesheet" type="text/css">
+       <!-- Yandex.Metrika counter -->
+       <script type="text/javascript">
+              (function(m,e,t,r,i,k,a){
+                  m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                  m[i].l=1*new Date();
+                  for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+                  k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+              })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=103903601', 'ym');
+
+              ym(103903601, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+       </script>
+       <noscript><div><img src="https://mc.yandex.ru/watch/103903601" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+       <!-- /Yandex.Metrika counter -->
 </head>
 
 <body>
@@ -17,29 +30,6 @@
 
 <script type="module">
 
-         // Import the functions you need from the SDKs you need
-         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
-         import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-analytics.js";
-         // TODO: Add SDKs for Firebase products that you want to use
-         // https://firebase.google.com/docs/web/setup#available-libraries
-
-         // Your web app's Firebase configuration
-         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-         const firebaseConfig = {
-           apiKey: "AIzaSyAdqBatKCvvNmJ7Xn7LcC06AG3RkNawYjY",
-           authDomain: "secrets-of-the-castle.firebaseapp.com",
-           databaseURL: "https://secrets-of-the-castle.firebaseio.com",
-           projectId: "secrets-of-the-castle",
-           storageBucket: "secrets-of-the-castle.appspot.com",
-           messagingSenderId: "287719247031",
-           appId: "1:287719247031:web:a822320c04c687fb57d132",
-           measurementId: "G-ZRT7QJZXER"
-         };
-
-         // Initialize Firebase
-         const app = initializeApp(firebaseConfig);
-         const analytics = getAnalytics(app);
-
               const urlParams = new URLSearchParams(window.location.search);
               const player_id = urlParams.get('viewer_id');
 
@@ -47,7 +37,6 @@
                      vkBridge.send('VKWebAppInit').then((data) => {
                                 if (data.result) {
                                    try {
-                                                 logEvent(analytics, 'progression', {progression_type: "init_vk_web_app"});
                                                 // Приложение инициализировано
                                                 vkBridge.send('VKWebAppShowBannerAd', {
                                                    banner_location: 'bottom'
@@ -55,27 +44,34 @@
                                                   .then((data) => {
                                                      if (data.result) {
                                                        // Баннерная реклама отобразилась
-                                                        logEvent(analytics, 'progression', {progression_type: "showed_banner"});
                                                      }
                                                    })
                                                    .catch((error) => {
                                                      // Ошибка
-                                                        logEvent(analytics, 'error', {error_description: "error_show_banner_ad"});
+                                                        window.logEvent('error_event', 'error_show_banner_ad');
                                                    });
                                      } catch (error) {
-                                          logEvent(analytics, 'error', {error_description: "error_send_banner_request"});
+                                           window.logEvent('error_event', 'error_send_banner_request');
                                      }
                                 } else {
                                   // Ошибка
-                                  logEvent(analytics, 'error', {error_description: "error_init_vk_web_app"});
+                                  window.logEvent('error_event', 'error_init_vk_web_app');
                                 }
                               })
                               .catch((error) => {
                                 // Ошибка
-                                logEvent(analytics, 'error', {error_description: "error_send_vk_init_request"});
+                                window.logEvent('error_event', 'error_send_vk_init_request');
                                 console.log(error);
                               });
                      logEvent(analytics, 'launch_game');
+              }
+
+              window.logEvent = function logEvent(event_name, event_param) {
+                     try {
+                            ym(103903601,'reachGoal',event_name,{desc: event_param});
+                     } catch (error) {
+                            console.log("Error sending event to Yandex Metrica");
+                     }
               }
 
               //window.InitVkWebApp();
@@ -84,13 +80,8 @@
                      try {
                             vkBridge.send("VKWebAppShowNativeAds", {"ad_format": "interstitial"});
                      } catch (error) {
-                             logEvent(analytics, 'error', {error_description: "error_show_interstitial"});
+                            window.logEvent('error_event', 'error_show_interstitial');
                      }
-                     logEvent(analytics, 'show_interstitial');
-              }
-
-              window.LogEventWeb = function logEventWeb(message) {
-                     console.log(message);
               }
 
               window.ShowRewarded = function showRewarded() {
@@ -99,9 +90,8 @@
                             .then(data => window.OnRewardedVideoShown(data.result))
                             .catch(error => console.log(error));
                      } catch (error) {
-                             logEvent(analytics, 'error', {error_description: "error_show_rewarded"});
+                             window.logEvent('error_event', 'error_show_rewarded');
                      }
-                     logEvent(analytics, 'show_rewarded');
               }
 
               window.BuyInApp = function buyInApp(inapp_id) {
@@ -116,7 +106,7 @@
                                    .then(data => window.OnGetKey(key, data.keys[0].value))
                                    .catch(error => console.log(error));
                      } catch (error) {
-                             logEvent(analytics, 'error', {error_description: "error_get_key"});
+                             window.logEvent('error_event', 'error_get_key');
                      }
               }
 
@@ -127,7 +117,7 @@
                                value: v
                             });
                      } catch (error) {
-                             logEvent(analytics, 'error', {error_description: "error_set_key"});
+                             window.logEvent('error_event', 'error_set_key');
                              }
               }
 
@@ -160,7 +150,7 @@
                                           "value":lvl
                                           }});
                      } catch (error) {
-                            logEvent(analytics, 'error', {error_description: "error_set_record"});
+                             window.logEvent('error_event', 'error_set_record');
                       }
               }
 
@@ -168,21 +158,18 @@
                      vkBridge.send("VKWebAppShowInviteBox", {})
                              .then(data => console.log(data.success))
                              .catch(error => console.log(error));
-                     logEvent(analytics, 'invite_friends');
               }
 
               window.LogLevelFailed = function logLevelFailed(lvl) {
-                     logEvent(analytics, 'level_failed_web', {level: lvl});
+
               }
 
               window.LogLevelCompleted = function logLevelCompleted(lvl) {
-                     logEvent(analytics, 'level_completed_web', {level: lvl});
+
               }
 
               window.LogEvent = function logCustomEvent(event_name, event_param, event_param_value) {
-                     var p = {};
-                     p[event_param] = event_param_value;
-                     logEvent(analytics, event_name, p);
+
               }
 
               window.ShowRecords = function showRecords(lvl) {
