@@ -170,7 +170,7 @@
               }
 
               window.LogEvent = function logCustomEvent(event_name, event_param, event_param_value) {
-
+                     window.LogMetrikaEvent('error_event', event_name + "::" + event_param + "::" + event_param_value);
               }
 
               window.ShowRecords = function showRecords(lvl) {
