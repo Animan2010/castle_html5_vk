@@ -106,13 +106,13 @@
               }
 
               window.GetKey = function getKey(key) {
-                     /*try {
+                     try {
                             vkBridge.send("VKWebAppStorageGet", {"keys": [key]})
                                    .then(data => window.OnGetKey(key, data.keys[0].value))
                                    .catch(error => console.log(error));
                      } catch (error) {
                              window.LogMetrikaEvent('error_event', 'error_get_key');
-                     }*/
+                     }
               }
 
               window.SetKey = function setKey(k, v) {
