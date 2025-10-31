@@ -35,23 +35,34 @@
               const urlParams = new URLSearchParams(window.location.search);
               const player_id = urlParams.get('viewer_id');
 
+              function showBannerAd(retryCount = 0) {
+                vkBridge.send('VKWebAppShowBannerAd', {
+                  banner_location: 'bottom'
+                })
+                .then((data) => {
+                  if (data.result) {
+                    console.log('Баннер успешно показан');
+                    window.LogMetrikaEvent('error_event', 'success_show_banner_ad ' + retryCount);
+                  }
+                })
+                .catch((error) => {
+                  console.log('Ошибка при показе баннера:', error);
+                  window.LogMetrikaEvent('error_event', 'error_show_banner_ad ' + retryCount);
+              
+                  // Повторная попытка через 3 секунды, максимум 3 попытки
+                  if (retryCount < 3) {
+                    setTimeout(() => showBannerAd(retryCount + 1), 3000);
+                  } else {
+                    console.log('Баннер не удалось показать после 3 попыток');
+                  }
+                });
+              }
+
               window.InitVkWebApp = function initVkWebApp() {
                      vkBridge.send('VKWebAppInit').then((data) => {
                                 if (data.result) {
                                    try {
-                                                // Приложение инициализировано
-                                                vkBridge.send('VKWebAppShowBannerAd', {
-                                                   banner_location: 'bottom'
-                                                   })
-                                                  .then((data) => {
-                                                     if (data.result) {
-                                                       // Баннерная реклама отобразилась
-                                                     }
-                                                   })
-                                                   .catch((error) => {
-                                                     // Ошибка
-                                                        window.LogMetrikaEvent('error_event', 'error_show_banner_ad');
-                                                   });
+                                                showBannerAd();
                                      } catch (error) {
                                            window.LogMetrikaEvent('error_event', 'error_send_banner_request');
                                      }
